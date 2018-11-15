@@ -9,95 +9,141 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using System.Data.Linq;
+using System.Data.Entity.Validation;
 
 namespace QLCHMAYTINH
 {
     public partial class NhanVienForm : DevExpress.XtraEditors.XtraForm
     {
-        Table<NHANVIEN> Bang_NHANVIEN;
-        BindingManagerBase DSNV;
-        DataClassesDataContext db;
+        string manv;
         public NhanVienForm()
         {
             InitializeComponent();
-        }
-
-        private void textEdit3_EditValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textEdit2_EditValueChanged(object sender, EventArgs e)
-        {
-
+            
         }
 
         private void NhanVienForm_Load(object sender, EventArgs e)
         {
-            db = new DataClassesDataContext();
-            Bang_NHANVIEN = db.NHANVIENs;
+            QLCHViTinhEntities db = new QLCHViTinhEntities();
+            gv_nhanvien.DataSource = db.NHANVIENs.OrderBy(a => a.MANV).ToList();
 
-            loadDGVNhanVien();
-            txt_manv.DataBindings.Add("text", Bang_NHANVIEN, "MANV", true);
-            txt_tennv.DataBindings.Add("text", Bang_NHANVIEN, "TENNV", true);
-            date_ngaysinh.DataBindings.Add("text", Bang_NHANVIEN, "NGAYSINH", true);
-            txt_cmnd.DataBindings.Add("text", Bang_NHANVIEN, "CMND", true);
-            txt_sdt.DataBindings.Add("text", Bang_NHANVIEN, "SDT", true);
-            txt_email.DataBindings.Add("text", Bang_NHANVIEN, "EMAIL", true);
-            txt_diachi.DataBindings.Add("text", Bang_NHANVIEN, "DCHI", true);
-
-            DSNV = this.BindingContext[Bang_NHANVIEN];
-            enableNutLenh(false);
         }
-
-        private void enableNutLenh(bool p)
-        {
-            btn_them.Enabled = !p;
-            btn_xoa.Enabled = !p;
-            btn_sua.Enabled = !p;
-            btn_luu.Enabled = p;
-            btn_thoat.Enabled = !p;
-        }
-
-        private void loadDGVNhanVien()
-        {
-            gv_nhanvien.DataSource = Bang_NHANVIEN;
-        }
-
+        
         private void btn_them_Click(object sender, EventArgs e)
-        {
-            DSNV.AddNew();
-            enableNutLenh(true);
-        }
-
-        private void btn_luu_Click(object sender, EventArgs e)
         {
             try
             {
-                DSNV.EndCurrentEdit();
-                db.SubmitChanges();
-                enableNutLenh(false);
+                if (txt_manv.Text == "")
+                {
+                    MessageBox.Show("Mã nhân viên không được phép rỗng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_tennv.Focus();
+                }
+                else
+                {
+                    if (txt_tennv.Text == "")
+                    {
+                        MessageBox.Show("Tên nhân viên không được phép rỗng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        txt_tennv.Focus();
+                    }
+                    else
+                    {
+                        DialogResult ds = MessageBox.Show("Tạo nhân viên mới ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        if (ds == DialogResult.OK)
+                        {
+                            QLCHViTinhEntities db = new QLCHViTinhEntities();
+                            QLCHMAYTINH.NHANVIEN item = new QLCHMAYTINH.NHANVIEN()
+                            {
+                                MANV = txt_manv.Text,
+                                TENNV = txt_tennv.Text,
+                                NGAYSINH = (DateTime)date_ngaysinh.EditValue,
+                                EMAIL = txt_email.Text,
+                                DCHI = txt_diachi.Text,
+                                SDT = txt_sdt.Text,
+                                CMND = txt_cmnd.Text
+                            };
+                            db.NHANVIENs.Add(item);
+                            db.SaveChanges();
+                            gv_nhanvien.DataSource = db.NHANVIENs.OrderBy(a => a.MANV).ToList();
+                            ClearData();
+                        }
+                        else
+                        {
+                            NhanVienForm_Load(sender, e);
+                            ClearData();
+                        }
+                    }
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Mã nhân viên đã tồn tại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btn_xoa_Click(object sender, EventArgs e)
         {
-            DSNV.RemoveAt(DSNV.Position);
-            db.SubmitChanges();
+             DialogResult ds = MessageBox.Show("Xóa nhân viên ?", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+             if (ds == DialogResult.OK)
+             {
+                 try
+                 {
+                     QLCHViTinhEntities db = new QLCHViTinhEntities();
+                     QLCHMAYTINH.NHANVIEN item = (from d in db.NHANVIENs
+                                   where d.MANV == manv
+                                   select d).Single();
+                     db.NHANVIENs.Remove(item);
+                     db.SaveChanges();
+                     gv_nhanvien.DataSource = db.NHANVIENs.OrderBy(a => a.MANV).ToList();
+                     ClearData();
+                 }
+                 catch (Exception ex)
+                 {
+                     throw ex;
+                 }
+             }
+             else
+             {
+                 NhanVienForm_Load(sender, e);
+                 ClearData();
+             }
         }
 
         private void btn_sua_Click(object sender, EventArgs e)
         {
-            enableNutLenh(true);
+
+        }
+
+        private void btn_timkiem_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btn_thoat_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        public void ClearData()
+        {
+            txt_manv.Text = "";
+            txt_tennv.Text = "";
+            txt_cmnd.Text = "";
+            txt_sdt.Text = "";
+            txt_email.Text = "";
+            txt_diachi.Text = "";
+        }
+
+        private void gridView1_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            manv = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "MANV").ToString();
+            txt_manv.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "MANV").ToString();
+            txt_tennv.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "TENNV").ToString();
+            date_ngaysinh.EditValue = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "NGAYSINH");
+            txt_cmnd.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "CMND").ToString();
+            txt_diachi.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "DCHI").ToString();
+            txt_email.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "EMAIL").ToString();
+            txt_sdt.Text = gridView1.GetRowCellValue(gridView1.FocusedRowHandle, "SDT").ToString();
+        }
+
     }
 }

@@ -71,8 +71,10 @@
             this.txt_matkhau.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_matkhau.Location = new System.Drawing.Point(152, 132);
             this.txt_matkhau.Name = "txt_matkhau";
+            this.txt_matkhau.PasswordChar = '*';
             this.txt_matkhau.Size = new System.Drawing.Size(190, 27);
             this.txt_matkhau.TabIndex = 5;
+            this.txt_matkhau.UseSystemPasswordChar = true;
             // 
             // label2
             // 
@@ -87,15 +89,17 @@
             // btn_dangnhap
             // 
             this.btn_dangnhap.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_dangnhap.Location = new System.Drawing.Point(302, 191);
+            this.btn_dangnhap.Location = new System.Drawing.Point(303, 191);
             this.btn_dangnhap.Name = "btn_dangnhap";
             this.btn_dangnhap.Size = new System.Drawing.Size(113, 38);
             this.btn_dangnhap.TabIndex = 6;
             this.btn_dangnhap.Text = "Đăng nhập";
             this.btn_dangnhap.UseVisualStyleBackColor = true;
+            this.btn_dangnhap.Click += new System.EventHandler(this.btn_dangnhap_Click);
             // 
             // DangNhap
             // 
+            this.AcceptButton = this.btn_dangnhap;
             this.Appearance.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.Appearance.ForeColor = System.Drawing.Color.DarkRed;
             this.Appearance.Options.UseBackColor = true;

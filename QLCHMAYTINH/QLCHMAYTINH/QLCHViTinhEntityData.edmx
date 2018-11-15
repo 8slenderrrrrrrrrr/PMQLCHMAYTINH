@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QLCHViTinhModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="QLCHViTinhModelStoreContainer">
+          <EntitySet Name="NHANVIEN" EntityType="QLCHViTinhModel.Store.NHANVIEN" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="USER" EntityType="QLCHViTinhModel.Store.USER" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Name="MANV" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="TENNV" Type="nvarchar" MaxLength="30" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="20" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="30" />
+          <Property Name="DCHI" Type="nvarchar" MaxLength="30" />
+          <Property Name="NGAYSINH" Type="datetime" />
+          <Property Name="CMND" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TAIKHOAN" Type="nchar" Nullable="false" MaxLength="30" />
+          <Property Name="MATKHAU" Type="nchar" Nullable="false" MaxLength="30" />
+          <Property Name="HOTEN" Type="nchar" MaxLength="30" />
+          <Property Name="DIACHI" Type="nchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="nchar" MaxLength="30" />
+          <Property Name="SDT" Type="nchar" MaxLength="10" />
+          <Property Name="NGAYTAO" Type="datetime" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QLCHViTinhModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QLCHViTinhEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="NHANVIENs" EntityType="QLCHViTinhModel.NHANVIEN" />
+          <EntitySet Name="USERs" EntityType="QLCHViTinhModel.USER" />
+        </EntityContainer>
+        <EntityType Name="NHANVIEN">
+          <Key>
+            <PropertyRef Name="MANV" />
+          </Key>
+          <Property Type="String" Name="MANV" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TENNV" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SDT" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EMAIL" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DCHI" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="NGAYSINH" Precision="3" />
+          <Property Type="String" Name="CMND" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TAIKHOAN" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="MATKHAU" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="HOTEN" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="DIACHI" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="EMAIL" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="SDT" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Type="DateTime" Name="NGAYTAO" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="QLCHViTinhModelStoreContainer" CdmEntityContainer="QLCHViTinhEntities">
+          <EntitySetMapping Name="NHANVIENs">
+            <EntityTypeMapping TypeName="QLCHViTinhModel.NHANVIEN">
+              <MappingFragment StoreEntitySet="NHANVIEN">
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="NGAYSINH" ColumnName="NGAYSINH" />
+                <ScalarProperty Name="DCHI" ColumnName="DCHI" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="TENNV" ColumnName="TENNV" />
+                <ScalarProperty Name="MANV" ColumnName="MANV" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERs">
+            <EntityTypeMapping TypeName="QLCHViTinhModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="NGAYTAO" ColumnName="NGAYTAO" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="HOTEN" ColumnName="HOTEN" />
+                <ScalarProperty Name="MATKHAU" ColumnName="MATKHAU" />
+                <ScalarProperty Name="TAIKHOAN" ColumnName="TAIKHOAN" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -40,9 +40,19 @@
     <Reference Include="DevExpress.XtraGrid.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v18.1, Version=18.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,16 +63,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataClasses.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NHANVIEN.cs">
+      <DependentUpon>QLCHViTinhEntityData.tt</DependentUpon>
     </Compile>
     <Compile Include="NhanVienForm.cs">
       <SubType>Form</SubType>
@@ -78,9 +86,30 @@
     <Compile Include="DangNhap.Designer.cs">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </Compile>
-    <None Include="DataClasses.dbml.layout">
-      <DependentUpon>DataClasses.dbml</DependentUpon>
-    </None>
+    <Compile Include="QLCHViTinhEntityData.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCHViTinhEntityData.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLCHViTinhEntityData.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCHViTinhEntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="QLCHViTinhEntityData.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLCHViTinhEntityData.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="USER.cs">
+      <DependentUpon>QLCHViTinhEntityData.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="DangNhap.resx">
       <DependentUpon>DangNhap.cs</DependentUpon>
     </EmbeddedResource>
@@ -101,11 +130,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="DataClasses.dbml">
-      <Generator>MSLinqToSQLGenerator</Generator>
-      <LastGenOutput>DataClasses.designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -120,6 +148,23 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <EntityDeploy Include="QLCHViTinhEntityData.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLCHViTinhEntityData.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="QLCHViTinhEntityData.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLCHViTinhEntityData.edmx</DependentUpon>
+      <LastGenOutput>QLCHViTinhEntityData.Context.cs</LastGenOutput>
+    </None>
+    <None Include="QLCHViTinhEntityData.edmx.diagram">
+      <DependentUpon>QLCHViTinhEntityData.edmx</DependentUpon>
+    </None>
+    <None Include="QLCHViTinhEntityData.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLCHViTinhEntityData.edmx</DependentUpon>
+      <LastGenOutput>QLCHViTinhEntityData.cs</LastGenOutput>
+    </None>
     <None Include="Resources\plus.png" />
   </ItemGroup>
   <ItemGroup>
@@ -136,6 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\admin.png" />
@@ -190,6 +236,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\baocao.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Images\admin.png" />
+    <Content Include="Images\backupandrecovery.png" />
+    <Content Include="Images\baocao.png" />
+    <Content Include="Images\customer.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\edit.png" />
+    <Content Include="Images\employee.png" />
+    <Content Include="Images\exit.png" />
+    <Content Include="Images\logout.png" />
+    <Content Include="Images\loinhuan.png" />
+    <Content Include="Images\plus.png" />
+    <Content Include="Images\product.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Images\search.png" />
+    <Content Include="Images\sell.png" />
+    <Content Include="Images\store.png" />
+    <Content Include="Images\supplier.png" />
+    <Content Include="Images\tonkho.png" />
+    <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
