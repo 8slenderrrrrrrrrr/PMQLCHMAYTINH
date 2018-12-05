@@ -4,16 +4,33 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="QLCHViTinhModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="QLCHViTinhModelStoreContainer">
-          <EntitySet Name="NHANVIEN" EntityType="QLCHViTinhModel.Store.NHANVIEN" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="USER" EntityType="QLCHViTinhModel.Store.USER" store:Type="Tables" Schema="dbo" />
-        </EntityContainer>
+    <Schema Namespace="QLCHViTinhModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Name="MAKH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TENKH" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="30" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="DCHI" Type="nvarchar" MaxLength="50" />
+          <Property Name="TAIKHOAN" Type="nvarchar" MaxLength="20" />
+          <Property Name="GHICHU" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LOAISANPHAM">
+          <Key>
+            <PropertyRef Name="MALOAIHH" />
+          </Key>
+          <Property Name="MALOAIHH" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TENLOAI" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ANHMH" Type="nvarchar" MaxLength="50" />
+          <Property Name="GHICHU" Type="nchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="NHANVIEN">
           <Key>
             <PropertyRef Name="MANV" />
           </Key>
-          <Property Name="MANV" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="MANV" Type="nvarchar" MaxLength="30" Nullable="false" />
           <Property Name="TENNV" Type="nvarchar" MaxLength="30" />
           <Property Name="SDT" Type="nvarchar" MaxLength="20" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="30" />
@@ -21,19 +38,40 @@
           <Property Name="NGAYSINH" Type="datetime" />
           <Property Name="CMND" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="NHAPHANPHOI">
+          <Key>
+            <PropertyRef Name="MANPP" />
+          </Key>
+          <Property Name="MANPP" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="TENNPP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIACHI" Type="nvarchar" MaxLength="50" />
+          <Property Name="DIENTHOAI" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="EMAIL" Type="nvarchar" MaxLength="30" />
+          <Property Name="FAX" Type="varchar" MaxLength="10" />
+          <Property Name="TAIKHOAN" Type="varchar" MaxLength="20" />
+          <Property Name="MSTHUE" Type="varchar" MaxLength="20" />
+          <Property Name="GHICHU" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="USER">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="TAIKHOAN" Type="nchar" Nullable="false" MaxLength="30" />
-          <Property Name="MATKHAU" Type="nchar" Nullable="false" MaxLength="30" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TAIKHOAN" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="MATKHAU" Type="nchar" MaxLength="30" Nullable="false" />
           <Property Name="HOTEN" Type="nchar" MaxLength="30" />
           <Property Name="DIACHI" Type="nchar" MaxLength="50" />
           <Property Name="EMAIL" Type="nchar" MaxLength="30" />
           <Property Name="SDT" Type="nchar" MaxLength="10" />
           <Property Name="NGAYTAO" Type="datetime" />
         </EntityType>
+        <EntityContainer Name="QLCHViTinhModelStoreContainer">
+          <EntitySet Name="KHACHHANG" EntityType="Self.KHACHHANG" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAISANPHAM" EntityType="Self.LOAISANPHAM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHANVIEN" EntityType="Self.NHANVIEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="NHAPHANPHOI" EntityType="Self.NHAPHANPHOI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -41,6 +79,9 @@
         <EntityContainer Name="QLCHViTinhEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="NHANVIENs" EntityType="QLCHViTinhModel.NHANVIEN" />
           <EntitySet Name="USERs" EntityType="QLCHViTinhModel.USER" />
+          <EntitySet Name="KHACHHANGs" EntityType="QLCHViTinhModel.KHACHHANG" />
+          <EntitySet Name="NHAPHANPHOIs" EntityType="QLCHViTinhModel.NHAPHANPHOI" />
+          <EntitySet Name="LOAISANPHAMs" EntityType="QLCHViTinhModel.LOAISANPHAM" />
         </EntityContainer>
         <EntityType Name="NHANVIEN">
           <Key>
@@ -66,6 +107,41 @@
           <Property Type="String" Name="EMAIL" MaxLength="30" FixedLength="true" Unicode="true" />
           <Property Type="String" Name="SDT" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Type="DateTime" Name="NGAYTAO" Precision="3" />
+        </EntityType>
+        <EntityType Name="KHACHHANG">
+          <Key>
+            <PropertyRef Name="MAKH" />
+          </Key>
+          <Property Type="String" Name="MAKH" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="TENKH" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="EMAIL" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SDT" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="DCHI" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TAIKHOAN" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="GHICHU" MaxLength="50" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="NHAPHANPHOI">
+          <Key>
+            <PropertyRef Name="MANPP" />
+          </Key>
+          <Property Name="MANPP" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TENNPP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DIENTHOAI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="FAX" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TAIKHOAN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MSTHUE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="GHICHU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LOAISANPHAM">
+          <Key>
+            <PropertyRef Name="MALOAIHH" />
+          </Key>
+          <Property Name="MALOAIHH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TENLOAI" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ANHMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="GHICHU" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -100,6 +176,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="KHACHHANGs">
+            <EntityTypeMapping TypeName="QLCHViTinhModel.KHACHHANG">
+              <MappingFragment StoreEntitySet="KHACHHANG">
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="TAIKHOAN" ColumnName="TAIKHOAN" />
+                <ScalarProperty Name="DCHI" ColumnName="DCHI" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TENKH" ColumnName="TENKH" />
+                <ScalarProperty Name="MAKH" ColumnName="MAKH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NHAPHANPHOIs">
+            <EntityTypeMapping TypeName="QLCHViTinhModel.NHAPHANPHOI">
+              <MappingFragment StoreEntitySet="NHAPHANPHOI">
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="MSTHUE" ColumnName="MSTHUE" />
+                <ScalarProperty Name="TAIKHOAN" ColumnName="TAIKHOAN" />
+                <ScalarProperty Name="FAX" ColumnName="FAX" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="DIENTHOAI" ColumnName="DIENTHOAI" />
+                <ScalarProperty Name="DIACHI" ColumnName="DIACHI" />
+                <ScalarProperty Name="TENNPP" ColumnName="TENNPP" />
+                <ScalarProperty Name="MANPP" ColumnName="MANPP" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAISANPHAMs">
+            <EntityTypeMapping TypeName="QLCHViTinhModel.LOAISANPHAM">
+              <MappingFragment StoreEntitySet="LOAISANPHAM">
+                <ScalarProperty Name="GHICHU" ColumnName="GHICHU" />
+                <ScalarProperty Name="ANHMH" ColumnName="ANHMH" />
+                <ScalarProperty Name="TENLOAI" ColumnName="TENLOAI" />
+                <ScalarProperty Name="MALOAIHH" ColumnName="MALOAIHH" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -117,6 +231,7 @@
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

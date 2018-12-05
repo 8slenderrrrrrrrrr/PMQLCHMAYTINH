@@ -3,6 +3,9 @@
   <EntityContainer Name="QLCHViTinhEntities" p1:LazyLoadingEnabled="true">
     <EntitySet Name="NHANVIENs" EntityType="QLCHViTinhModel.NHANVIEN" />
     <EntitySet Name="USERs" EntityType="QLCHViTinhModel.USER" />
+    <EntitySet Name="KHACHHANGs" EntityType="QLCHViTinhModel.KHACHHANG" />
+    <EntitySet Name="NHAPHANPHOIs" EntityType="QLCHViTinhModel.NHAPHANPHOI" />
+    <EntitySet Name="LOAISANPHAMs" EntityType="QLCHViTinhModel.LOAISANPHAM" />
   </EntityContainer>
   <EntityType Name="NHANVIEN">
     <Key>
@@ -28,5 +31,40 @@
     <Property Type="String" Name="EMAIL" MaxLength="30" FixedLength="true" Unicode="true" />
     <Property Type="String" Name="SDT" MaxLength="10" FixedLength="true" Unicode="true" />
     <Property Type="DateTime" Name="NGAYTAO" Precision="3" />
+  </EntityType>
+  <EntityType Name="KHACHHANG">
+    <Key>
+      <PropertyRef Name="MAKH" />
+    </Key>
+    <Property Type="String" Name="MAKH" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="TENKH" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="EMAIL" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="SDT" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="DCHI" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="TAIKHOAN" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="GHICHU" MaxLength="50" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="NHAPHANPHOI">
+    <Key>
+      <PropertyRef Name="MANPP" />
+    </Key>
+    <Property Name="MANPP" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TENNPP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DIACHI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DIENTHOAI" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="FAX" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TAIKHOAN" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="MSTHUE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="GHICHU" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="LOAISANPHAM">
+    <Key>
+      <PropertyRef Name="MALOAIHH" />
+    </Key>
+    <Property Name="MALOAIHH" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TENLOAI" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ANHMH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GHICHU" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
   </EntityType>
 </Schema>

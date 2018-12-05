@@ -67,5 +67,26 @@ namespace QLCHMAYTINH
             ViewChildForm(user);
 
         }
+
+        private void btn_khachhang_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            KhachHangForm khachhang = new KhachHangForm();
+            khachhang.Name = "KhachHangForm";
+            ViewChildForm(khachhang);
+        }
+
+        private void barButtonItem10_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            NhaPPForm nhaphanphoi = new NhaPPForm();
+            nhaphanphoi.Name = "NhaPPForm";
+            ViewChildForm(nhaphanphoi);
+        }
+
+        private void btn_loaisp_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            LoaiSPForm loaisanpham = new LoaiSPForm();
+            loaisanpham.Name = "LoaiSPForm";
+            ViewChildForm(loaisanpham);
+        }
     }
 }

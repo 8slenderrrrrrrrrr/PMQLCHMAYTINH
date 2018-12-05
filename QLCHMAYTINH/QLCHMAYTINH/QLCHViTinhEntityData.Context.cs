@@ -27,5 +27,8 @@ namespace QLCHMAYTINH
     
         public DbSet<NHANVIEN> NHANVIENs { get; set; }
         public DbSet<USER> USERs { get; set; }
+        public DbSet<KHACHHANG> KHACHHANGs { get; set; }
+        public DbSet<NHAPHANPHOI> NHAPHANPHOIs { get; set; }
+        public DbSet<LOAISANPHAM> LOAISANPHAMs { get; set; }
     }
 }

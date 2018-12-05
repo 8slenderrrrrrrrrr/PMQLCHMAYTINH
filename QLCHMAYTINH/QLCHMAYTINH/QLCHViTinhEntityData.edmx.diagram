@@ -6,7 +6,10 @@
     <edmx:Diagrams>
       <Diagram DiagramId="bc1ac81459dd4363bb0026d4adb11e7b" Name="Diagram1">
         <EntityTypeShape EntityType="QLCHViTinhModel.NHANVIEN" Width="1.5" PointX="4.8966905851367351" PointY="1.3505376732677863" />
-        <EntityTypeShape EntityType="QLCHViTinhModel.USER" Width="1.5" PointX="1.875" PointY="3.125" />
+        <EntityTypeShape EntityType="QLCHViTinhModel.USER" Width="1.5" PointX="1.375" PointY="1.25" />
+        <EntityTypeShape EntityType="QLCHViTinhModel.KHACHHANG" Width="1.5" PointX="3.25" PointY="1.375" />
+        <EntityTypeShape EntityType="QLCHViTinhModel.NHAPHANPHOI" Width="1.5" PointX="6.625" PointY="1.375" />
+        <EntityTypeShape EntityType="QLCHViTinhModel.LOAISANPHAM" Width="1.5" PointX="1.25" PointY="4.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
